@@ -134,6 +134,9 @@ export default function Hero() {
           </div>
         </div>
       </div>
+
+      {/* Mobile Specific Adjustments */}
+     
     </div>
   );
 }
