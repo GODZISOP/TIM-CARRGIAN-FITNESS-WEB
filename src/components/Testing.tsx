@@ -1,7 +1,7 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
 import { Star } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
+import gsap from 'gsap';
 import styles from '../styles/Test.module.css';
 
 const testimonials = [
@@ -29,6 +29,37 @@ const testimonials = [
 ];
 
 export function Test() {
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  const { ref, inView } = useInView({
+    triggerOnce: false,
+    threshold: 0.5,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      gsap.to(cardsRef.current, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        rotation: 0,
+        stagger: 0.1,
+        ease: 'easeOut',
+        duration: 0.6,
+      });
+    } else {
+      gsap.to(cardsRef.current, {
+        opacity: 0,
+        y: 100,
+        scale: 0.9,
+        rotation: 10,
+        stagger: 0.1,
+        ease: 'easeInOut',
+        duration: 0.4,
+      });
+    }
+  }, [inView]);
+
   return (
     <div className={styles.container}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -38,55 +69,33 @@ export function Test() {
             Real stories from real people who have transformed their lives with us.
           </p>
         </div>
-        <div className={styles.grid}>
-          {testimonials.map((testimonial, index) => {
-            const [ref, inView] = useInView({
-              triggerOnce: false,  // Allows animation when scrolling down and up
-              threshold: 0.2,  // Trigger when 20% of the element is visible
-            });
-
-            return (
-              <motion.div
-                key={index}
-                ref={ref}
-                initial={{
-                  opacity: 0,
-                  y: 100,
-                  scale: 0.9,
-                  rotate: 10,  // Add slight rotation for more dynamic animation
-                }}
-                animate={
-                  inView
-                    ? { opacity: 1, y: 0, scale: 1, rotate: 20 }
-                    : { opacity: 0, y: 150, scale: 0.90, rotate: 20 }
-                }
-                transition={{
-                  duration: inView ? 1 : 0.2,  // Shorter duration for scroll-back animation
-                  ease: "easeInOut",
-                  delay: index * 0.2,  // Delay for staggered animation
-                }}
-                className={styles.testimonialCard}
-              >
-                <div className={styles.testimonialHeader}>
-                  <img
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    className={styles.testimonialImage}
-                  />
-                  <div>
-                    <h3 className={styles.testimonialName}>{testimonial.name}</h3>
-                    <p className={styles.testimonialRole}>{testimonial.role}</p>
-                  </div>
+        <div ref={ref} className={styles.grid}>
+          {testimonials.map((testimonial, index) => (
+            <div
+              key={index}
+              ref={(el) => (cardsRef.current[index] = el)}
+              className={styles.testimonialCard}
+              style={{ opacity: 0, transform: 'translateY(100px) scale(0.9) rotate(10deg)' }} // Initial state
+            >
+              <div className={styles.testimonialHeader}>
+                <img
+                  src={testimonial.image}
+                  alt={testimonial.name}
+                  className={styles.testimonialImage}
+                />
+                <div>
+                  <h3 className={styles.testimonialName}>{testimonial.name}</h3>
+                  <p className={styles.testimonialRole}>{testimonial.role}</p>
                 </div>
-                <div className={styles.starRating}>
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                <p className={styles.quote}>"{testimonial.quote}"</p>
-              </motion.div>
-            );
-          })}
+              </div>
+              <div className={styles.starRating}>
+                {[...Array(testimonial.rating)].map((_, i) => (
+                  <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                ))}
+              </div>
+              <p className={styles.quote}>"{testimonial.quote}"</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
