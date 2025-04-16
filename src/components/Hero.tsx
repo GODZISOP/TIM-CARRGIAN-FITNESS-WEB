@@ -3,17 +3,26 @@ import { motion } from 'framer-motion';
 
 export default function Hero() {
   const [scrollY, setScrollY] = useState(0); // Track scroll position
+  const [isScrolling, setIsScrolling] = useState(false);
 
   useEffect(() => {
+    let scrollTimeout;
+
     const handleScroll = () => {
-      setScrollY(window.scrollY); // Update scroll position on scroll
+      if (!isScrolling) {
+        setIsScrolling(true);
+        requestAnimationFrame(() => {
+          setScrollY(window.scrollY); // Update scroll position with requestAnimationFrame
+          setIsScrolling(false);
+        });
+      }
     };
 
     window.addEventListener('scroll', handleScroll); // Add event listener to track scroll
     return () => {
       window.removeEventListener('scroll', handleScroll); // Clean up the event listener
     };
-  }, []);
+  }, [isScrolling]);
 
   return (
     <div className="relative overflow-hidden bg-black">
@@ -125,8 +134,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-
-     
     </div>
   );
 }
