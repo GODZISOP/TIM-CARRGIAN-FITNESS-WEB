@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+.marqueeWrapper {
+  overflow: hidden;
+  width: 100%;
+  background: linear-gradient(90deg, #ff0000, #cc0000); /* Bold red gradient */
+  padding: 2rem 0;
+  border-top: 5px solid #ffffff;
+  border-bottom: 5px solid #ffffff;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+.marquee {
+  display: flex;
+  white-space: nowrap;
+  animation: scroll 20s linear infinite;
+}
+
+.marqueeInner {
+  display: flex;
+}
+
+.featureItem {
+  margin: 0 4rem;
+  font-family: 'Anton', sans-serif;
+  font-weight: 800;
+  font-size: 2vw;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, color 0.3s ease;
+  position: relative;
+}
+
+.featureItem::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 3px;
+  background-color: #ffffff;
+  bottom: -6px;
+  left: 0;
+  transition: width 0.3s ease;
+}
+
+.featureItem:hover {
+  transform: scale(1.1);
+  color: #ffe600; /* A bright yellow/gold hover for contrast */
+}
+
+.featureItem:hover::after {
+  width: 100%;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Mobile-friendly styles */
+@media (max-width: 768px) {
+  .featureItem {
+    font-size: 1.6rem;
+    margin: 0 1.5rem;
+    text-align: center;
+  }
+}

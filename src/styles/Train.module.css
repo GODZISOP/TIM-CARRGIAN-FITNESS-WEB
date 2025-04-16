@@ -1,0 +1,176 @@
+/* Main Section */
+.bioSection {
+  padding: 4rem 2rem;
+  color: #333;
+
+
+
+}
+
+.bioContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  overflow: hidden;
+  background: white;
+}
+
+/* Image Styles */
+.imageContainer {
+  position: relative;
+  height: 100%;
+}
+
+.trainerImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.imageOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255, 0, 0, 0.1), rgba(255, 0, 0, 0));
+}
+
+/* Content Styles */
+.bioContent {
+  padding: 3rem 2rem;
+}
+
+.header {
+  margin-bottom: 2rem;
+}
+
+.name {
+  font-size: 2.5rem;
+  margin: 0;
+  color: #d10000;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.titleDivider {
+  height: 4px;
+  width: 80px;
+  background: #d10000;
+  margin: 1rem 0;
+}
+
+.title {
+  font-size: 1.1rem;
+  color: #666;
+  margin: 0.5rem 0 0;
+  font-weight: 500;
+}
+
+/* Achievements */
+.achievements {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.achievementItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.achievementItem span {
+  font-size: 1.2rem;
+}
+
+/* Philosophy */
+.philosophy {
+  margin: 2.5rem 0;
+}
+
+.philosophyTitle {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.titleAccent {
+  color: #d10000;
+}
+
+.philosophyText {
+  line-height: 1.8;
+  color: #555;
+  font-size: 1.05rem;
+}
+
+/* Quote */
+.quote {
+  position: relative;
+  padding: 2rem;
+  background: #f8f8f8;
+  border-left: 4px solid #d10000;
+  border-radius: 0 8px 8px 0;
+  margin: 2rem 0 0;
+  font-style: italic;
+}
+
+.quote p {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+.quoteMark {
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  font-size: 4rem;
+  color: rgba(209, 0, 0, 0.1);
+  font-style: normal;
+  line-height: 1;
+}
+
+.quoteBar {
+  height: 3px;
+  width: 50px;
+  background: #d10000;
+  margin-top: 1.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .bioContainer {
+    grid-template-columns: 1fr;
+  }
+  
+  .trainerImage {
+    max-height: 400px;
+  }
+  
+  .bioContent {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .achievements {
+    grid-template-columns: 1fr;
+  }
+  
+  .name {
+    font-size: 2rem;
+  }
+}
