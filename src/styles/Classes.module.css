@@ -4,9 +4,9 @@
   margin-top: 5vh;
   justify-content: flex-start;         /* left-align for natural scroll */
   gap: 3vw;
+  justify-content: center;
   overflow-x: hidden;                    /* enables horizontal scrolling */
   overflow-y: hidden;                 /* prevents vertical scroll */
-  padding: 0 5vw;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;   /* smooth scroll on mobile */
   scrollbar-width: auto;               /* for Firefox */
