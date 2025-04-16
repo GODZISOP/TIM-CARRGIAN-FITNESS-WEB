@@ -41,6 +41,18 @@ export default function Hero() {
     transform: isMobile ? 'translateY(0)' : `translateY(${scrollY * 0.1}px)`, // Light move for desktop, none for mobile
   };
 
+  // Mobile styles (lighter opacity and no big translate)
+  const mobileStyle = {
+    opacity: 1 - scrollY / 600, // Slight opacity change for mobile
+    transform: 'translateY(0)', // No translateY for mobile
+  };
+
+  // Desktop styles (parallax effect for PC)
+  const desktopStyle = {
+    opacity: 1 - scrollY / 500,
+    transform: `translateY(${scrollY * 0.1}px)`, // Parallax movement on scroll
+  };
+
   return (
     <div className="relative overflow-hidden bg-black">
       {/* Background Image with Overlay */}
@@ -59,7 +71,7 @@ export default function Hero() {
           <div>
             <motion.div
               className="text-white text-xl font-bold"
-              style={scrollStyle}
+              style={isMobile ? mobileStyle : desktopStyle}
               transition={{ duration: 0.5, ease: 'easeOut' }}
             >
               <span>FitLife</span>
@@ -67,7 +79,7 @@ export default function Hero() {
 
             <motion.h1
               className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight"
-              style={scrollStyle}
+              style={isMobile ? mobileStyle : desktopStyle}
               transition={{ duration: 0.5, ease: 'easeOut' }}
             >
               Transform Your Body,<br />
@@ -76,7 +88,7 @@ export default function Hero() {
 
             <motion.p
               className="text-gray-300 text-lg mb-8 max-w-lg"
-              style={scrollStyle}
+              style={isMobile ? mobileStyle : desktopStyle}
               transition={{ duration: 0.5, ease: 'easeOut' }}
             >
               Join our community of fitness enthusiasts and start your journey to a healthier you.
@@ -84,7 +96,7 @@ export default function Hero() {
 
             <motion.div
               className="flex gap-4"
-              style={scrollStyle}
+              style={isMobile ? mobileStyle : desktopStyle}
               transition={{ duration: 0.5, ease: 'easeOut' }}
             >
               <motion.button
@@ -107,7 +119,7 @@ export default function Hero() {
           <div className="hidden md:flex justify-center">
             <motion.div
               className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10 w-full max-w-md"
-              style={scrollStyle}
+              style={isMobile ? mobileStyle : desktopStyle}
               transition={{ duration: 0.5, ease: 'easeOut' }}
             >
               <h3 className="text-2xl font-bold text-white mb-4">Join Today</h3>
