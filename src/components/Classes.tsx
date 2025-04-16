@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Clock, Users, ChevronRight } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from '../styles/Classes.module.css';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const classes = [
   {
@@ -25,33 +27,52 @@ const classes = [
   },
 ];
 
-// Subtle and lightweight card animation
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0 },
-};
-
 export default function Classes() {
-  const [ref, inView] = useInView({
-    triggerOnce: false,
-    threshold: 0.2,
-  });
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    cardRefs.current.forEach((el, index) => {
+      if (!el) return;
+  
+      gsap.fromTo(
+        el,
+        {
+          opacity: 0,
+          y: index % 2 === 0 ? 100 : -100,
+          x: index % 2 === 0 ? -100 : 100,
+          scale: 0.9,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          x: 0,
+          scale: 1,
+          duration: 1,
+          ease: 'power4.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 85%',
+            end: 'bottom 60%',
+            toggleActions: 'play reverse play reverse',
+            scrub: false,
+          },
+        }
+      );
+    });
+  
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
 
   return (
     <section className={styles.section}>
-      <div className={styles.grid} ref={ref}>
+      <div className={styles.grid}>
         {classes.map((classItem, index) => (
-          <motion.div
+          <div
             key={index}
+            ref={(el) => (cardRefs.current[index] = el)}
             className={styles.card}
-            variants={cardVariants}
-            initial="hidden"
-            animate={inView ? 'visible' : 'hidden'}
-            transition={{
-              duration: 0.5,
-              delay: index * 0.1,
-              ease: 'easeOut',
-            }}
           >
             <div className={styles.imageWrapper}>
               <img src={classItem.image} alt={classItem.title} className={styles.image} />
@@ -71,7 +92,7 @@ export default function Classes() {
                 <span>{classItem.level}</span>
               </div>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     </section>

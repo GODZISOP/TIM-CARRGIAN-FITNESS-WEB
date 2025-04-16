@@ -1,105 +1,98 @@
 import React, { useEffect, useRef } from 'react';
-import { Star } from 'lucide-react';
-import { useInView } from 'react-intersection-observer';
 import gsap from 'gsap';
-import styles from '../styles/Test.module.css';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import styles from '../styles/Classes.module.css';
 
-const testimonials = [
+gsap.registerPlugin(ScrollTrigger);
+
+const classes = [
   {
-    name: 'Sarah Johnson',
-    role: 'Fitness Enthusiast',
-    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80',
-    quote: 'The trainers here are amazing! I\'ve achieved results I never thought possible.',
-    rating: 5,
+    image: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=80',
+    title: 'High-Intensity Training',
+    time: '45 mins',
+    level: 'Intermediate',
   },
   {
-    name: 'Mike Thompson',
-    role: 'Marathon Runner',
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80',
-    quote: 'The facilities and support have helped me reach new personal records.',
-    rating: 5,
+    image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80',
+    title: 'Yoga Flow',
+    time: '60 mins',
+    level: 'All Levels',
   },
   {
-    name: 'Emily Chen',
-    role: 'Yoga Practitioner',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80',
-    quote: 'Found my fitness community here. The classes are challenging and fun!',
-    rating: 5,
-  }
+    image: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&q=80',
+    title: 'Strength Training',
+    time: '50 mins',
+    level: 'Advanced',
+  },
 ];
 
-export function Test() {
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-
-  const { ref, inView } = useInView({
-    triggerOnce: false,
-    threshold: 0.5,
-  });
-
+export default function Classes() {
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   useEffect(() => {
-    if (inView) {
-      gsap.to(cardsRef.current, {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        rotation: 0,
-        stagger: 0.1,
-        ease: 'easeOut',
-        duration: 0.6,
-      });
-    } else {
-      gsap.to(cardsRef.current, {
-        opacity: 0,
-        y: 100,
-        scale: 0.9,
-        rotation: 10,
-        stagger: 0.1,
-        ease: 'easeInOut',
-        duration: 0.4,
-      });
-    }
-  }, [inView]);
-
-  return (
-    <div className={styles.container}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={styles.header}>
-          <h2 className={styles.headerTitle}>What Our Members Say</h2>
-          <p className={styles.headerSubtitle}>
-            Real stories from real people who have transformed their lives with us.
-          </p>
-        </div>
-        <div ref={ref} className={styles.grid}>
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              ref={(el) => (cardsRef.current[index] = el)}
-              className={styles.testimonialCard}
-              style={{ opacity: 0, transform: 'translateY(100px) scale(0.9) rotate(10deg)' }} // Initial state
-            >
-              <div className={styles.testimonialHeader}>
-                <img
-                  src={testimonial.image}
-                  alt={testimonial.name}
-                  className={styles.testimonialImage}
-                />
-                <div>
-                  <h3 className={styles.testimonialName}>{testimonial.name}</h3>
-                  <p className={styles.testimonialRole}>{testimonial.role}</p>
-                </div>
+    cardRefs.current.forEach((el, index) => {
+      if (!el) return;
+  
+      gsap.fromTo(
+        el,
+        {
+          opacity: 0,
+          y: 100,
+          x: -100,
+          scale: 0.9,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          x: 0,
+          scale: 1,
+          duration: 0.8,
+          ease: 'power4.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 85%',
+            end: 'top 30%',
+            toggleActions: 'play reverse play reverse',
+            scrub: false,
+            once: false,
+          },
+        }
+      );
+      
+      
+      
+    });
+  
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, [])
+    return (
+    <section className={styles.section}>
+      <div className={styles.grid}>
+        {classes.map((classItem, index) => (
+          <div
+            key={index}
+            ref={(el) => (cardRefs.current[index] = el)}
+            className={styles.card}
+          >
+            <div className={styles.imageWrapper}>
+              <img src={classItem.image} alt={classItem.title} className={styles.image} />
+              <div className={styles.overlay}>
+                <button className={styles.button}>
+                  Join Class
+                </button>
               </div>
-              <div className={styles.starRating}>
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                ))}
-              </div>
-              <p className={styles.quote}>"{testimonial.quote}"</p>
             </div>
-          ))}
-        </div>
+            <div className={styles.content}>
+              <h3 className={styles.title}>{classItem.title}</h3>
+              <div className={styles.info}>
+                <span>{classItem.time}</span>
+                <span>{classItem.level}</span>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
-    </div>
+    </section>
   );
 }
-
-export default Test;
