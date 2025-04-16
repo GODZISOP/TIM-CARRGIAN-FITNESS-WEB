@@ -20,7 +20,7 @@ export default function Hero() {
 
   // Use requestAnimationFrame for smooth scroll animations
   useEffect(() => {
-    let animationFrameId;
+    let animationFrameId: number; // Explicitly typing animationFrameId as number
 
     const handleScroll = () => {
       animationFrameId = requestAnimationFrame(() => {
