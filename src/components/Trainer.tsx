@@ -5,8 +5,8 @@ import trainerImg from '../images/OIP.jpeg';
 import styles from '../styles/Train.module.css';
 
 const Trainerbio = () => {
-  const [imgRef, imgInView] = useInView({ threshold: 0.3 });
-  const [textRef, textInView] = useInView({ threshold: 0.3 });
+  const [imgRef, imgInView] = useInView({ threshold: 0.5 }); // Increased threshold to 0.5
+  const [textRef, textInView] = useInView({ threshold: 0.5 }); // Increased threshold to 0.5
 
   return (
     <section className={styles.bioSection}>
@@ -15,9 +15,9 @@ const Trainerbio = () => {
         {/* Image Animation */}
         <motion.div
           ref={imgRef}
-          initial={{ opacity: 0, y: 60 }}
-          animate={imgInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
+          initial={{ opacity: 0, y: 30 }}  // Reduced y-value for smaller animation
+          animate={imgInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.3, ease: 'easeOut' }} // Shortened duration for mobile
           className={styles.imageContainer}
         >
           <img src={trainerImg} alt="Trainer Alex Strong" className={styles.trainerImage} />
@@ -27,9 +27,9 @@ const Trainerbio = () => {
         {/* Text Content Animation */}
         <motion.div
           ref={textRef}
-          initial={{ opacity: 0, x: 40 }}
-          animate={textInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
-          transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
+          initial={{ opacity: 0, x: 20 }} // Reduced x-value for smaller animation
+          animate={textInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+          transition={{ duration: 0.3, ease: 'easeOut', delay: 0.1 }} // Shortened duration and added delay
           className={styles.bioContent}
         >
           <div className={styles.header}>
