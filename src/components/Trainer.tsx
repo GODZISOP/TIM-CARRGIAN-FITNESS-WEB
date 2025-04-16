@@ -5,30 +5,19 @@ import trainerImg from '../images/OIP.jpeg';
 import styles from '../styles/Train.module.css';
 
 const Trainerbio = () => {
-  const [imgRef, imgInView] = useInView({ threshold: 0.3, triggerOnce: false });
-  const [textRef, textInView] = useInView({ threshold: 0.3, triggerOnce: false });
-
-  // Define animation styles based on device type (mobile vs desktop)
-  const mobileStyle = {
-    opacity: 1 - (window.scrollY / 600),
-    transform: 'translateY(0)',
-  };
-
-  const desktopStyle = {
-    opacity: 1 - (window.scrollY / 500),
-    transform: 'translateY(30px)', // Parallax effect for PC
-  };
+  const [imgRef, imgInView] = useInView({ threshold: 0.3 });
+  const [textRef, textInView] = useInView({ threshold: 0.3 });
 
   return (
     <section className={styles.bioSection}>
       <div className={styles.bioContainer}>
-        
+
         {/* Image Animation */}
         <motion.div
           ref={imgRef}
-          initial={{ opacity: 0, x: -100, y: 50 }}
-          animate={imgInView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, x: -100, y: 30 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
+          initial={{ opacity: 0, y: 60 }}
+          animate={imgInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
           className={styles.imageContainer}
         >
           <img src={trainerImg} alt="Trainer Alex Strong" className={styles.trainerImage} />
@@ -38,9 +27,9 @@ const Trainerbio = () => {
         {/* Text Content Animation */}
         <motion.div
           ref={textRef}
-          initial={{ opacity: 0, x: 100, y: 50 }}
-          animate={textInView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, x: 100, y: -30 }}
-          transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
+          initial={{ opacity: 0, x: 40 }}
+          animate={textInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
+          transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
           className={styles.bioContent}
         >
           <div className={styles.header}>
