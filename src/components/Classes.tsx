@@ -31,35 +31,36 @@ export default function Classes() {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
+    const isMobile = window.innerWidth <= 768; // Check if the device is mobile
+
     cardRefs.current.forEach((el, index) => {
       if (!el) return;
-  
+
       gsap.fromTo(
         el,
         {
           opacity: 0,
-          y: index % 2 === 0 ? 100 : -100,
-          x: index % 2 === 0 ? -100 : 100,
-          scale: 0.9,
+          y: isMobile ? 50 : index % 2 === 0 ? 100 : -100,
+          x: isMobile ? 0 : index % 2 === 0 ? -100 : 50,
         },
         {
           opacity: 1,
           y: 0,
           x: 0,
-          scale: 1,
-          duration: 1,
-          ease: 'power4.out',
+          duration: 0.75,  // Reduced duration for smoother effect
+          ease: 'power2.out',  // Adjusted easing for smoother transitions
           scrollTrigger: {
             trigger: el,
-            start: 'top 85%',
-            end: 'bottom 60%',
-            toggleActions: 'play reverse play reverse',
-            scrub: false,
+            start: 'top 85%', // Start the animation earlier when the element comes into view
+            end: 'bottom 50%', // Ends animation when it leaves the viewport
+            toggleActions: 'play none none none', // Play only when scrolling down
+            scrub: 0.5, // Adjust scrub value for better smoothness
+            markers: false, // Set to true for debugging the scrollTrigger positions
           },
         }
       );
     });
-  
+
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
