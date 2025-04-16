@@ -2,27 +2,44 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 export default function Hero() {
-  const [scrollY, setScrollY] = useState(0); // Track scroll position
-  const [isScrolling, setIsScrolling] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
+  // Detect mobile screen size
   useEffect(() => {
-    let scrollTimeout;
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); // Check if screen is mobile-sized
+    };
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Initial check
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  // Use requestAnimationFrame for smooth scroll animations
+  useEffect(() => {
+    let animationFrameId;
 
     const handleScroll = () => {
-      if (!isScrolling) {
-        setIsScrolling(true);
-        requestAnimationFrame(() => {
-          setScrollY(window.scrollY); // Update scroll position with requestAnimationFrame
-          setIsScrolling(false);
-        });
-      }
+      animationFrameId = requestAnimationFrame(() => {
+        setScrollY(window.scrollY);
+      });
     };
 
-    window.addEventListener('scroll', handleScroll); // Add event listener to track scroll
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll); // Clean up the event listener
+      cancelAnimationFrame(animationFrameId); // Clean up the animation frame on unmount
+      window.removeEventListener('scroll', handleScroll);
     };
-  }, [isScrolling]);
+  }, []);
+
+  // Simple animation logic based on scroll position
+  const scrollStyle = {
+    opacity: isMobile ? 1 : 1 - scrollY / 500,
+    transform: isMobile ? 'translateY(0)' : `translateY(${scrollY * 0.1}px)`, // Light move for desktop, none for mobile
+  };
 
   return (
     <div className="relative overflow-hidden bg-black">
@@ -42,10 +59,7 @@ export default function Hero() {
           <div>
             <motion.div
               className="text-white text-xl font-bold"
-              style={{
-                opacity: 1 - scrollY / 500, // Fade out as you scroll down
-                transform: `translateY(${scrollY * 0.3}px)`, // Move down as you scroll
-              }}
+              style={scrollStyle}
               transition={{ duration: 0.5, ease: 'easeOut' }}
             >
               <span>FitLife</span>
@@ -53,10 +67,7 @@ export default function Hero() {
 
             <motion.h1
               className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight"
-              style={{
-                opacity: 1 - scrollY / 600, // Fade out as you scroll down
-                transform: `translateY(${scrollY * 0.5}px)`, // Move down as you scroll
-              }}
+              style={scrollStyle}
               transition={{ duration: 0.5, ease: 'easeOut' }}
             >
               Transform Your Body,<br />
@@ -65,10 +76,7 @@ export default function Hero() {
 
             <motion.p
               className="text-gray-300 text-lg mb-8 max-w-lg"
-              style={{
-                opacity: 1 - scrollY / 700, // Fade out as you scroll
-                transform: `translateY(${scrollY * 0.2}px)`, // Move down as you scroll
-              }}
+              style={scrollStyle}
               transition={{ duration: 0.5, ease: 'easeOut' }}
             >
               Join our community of fitness enthusiasts and start your journey to a healthier you.
@@ -76,10 +84,7 @@ export default function Hero() {
 
             <motion.div
               className="flex gap-4"
-              style={{
-                opacity: 1 - scrollY / 800, // Fade out as you scroll
-                transform: `translateY(${scrollY * 0.1}px)`, // Move down as you scroll
-              }}
+              style={scrollStyle}
               transition={{ duration: 0.5, ease: 'easeOut' }}
             >
               <motion.button
@@ -102,10 +107,7 @@ export default function Hero() {
           <div className="hidden md:flex justify-center">
             <motion.div
               className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10 w-full max-w-md"
-              style={{
-                opacity: 1 - scrollY / 500, // Fade out as you scroll
-                transform: `translateY(${scrollY * 0.4}px)`, // Move down as you scroll
-              }}
+              style={scrollStyle}
               transition={{ duration: 0.5, ease: 'easeOut' }}
             >
               <h3 className="text-2xl font-bold text-white mb-4">Join Today</h3>
@@ -134,9 +136,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-
-      {/* Mobile Specific Adjustments */}
-     
     </div>
   );
 }
