@@ -8,6 +8,17 @@ const Trainerbio = () => {
   const [imgRef, imgInView] = useInView({ threshold: 0.3, triggerOnce: false });
   const [textRef, textInView] = useInView({ threshold: 0.3, triggerOnce: false });
 
+  // Define animation styles based on device type (mobile vs desktop)
+  const mobileStyle = {
+    opacity: 1 - (window.scrollY / 600),
+    transform: 'translateY(0)',
+  };
+
+  const desktopStyle = {
+    opacity: 1 - (window.scrollY / 500),
+    transform: 'translateY(30px)', // Parallax effect for PC
+  };
+
   return (
     <section className={styles.bioSection}>
       <div className={styles.bioContainer}>
