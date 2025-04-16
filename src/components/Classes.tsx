@@ -9,36 +9,26 @@ const classes = [
     image: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=80',
     title: 'High-Intensity Training',
     time: '45 mins',
-    level: 'Intermediate'
+    level: 'Intermediate',
   },
   {
     image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80',
     title: 'Yoga Flow',
     time: '60 mins',
-    level: 'All Levels'
+    level: 'All Levels',
   },
   {
     image: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&q=80',
     title: 'Strength Training',
     time: '50 mins',
-    level: 'Advanced'
-  }
+    level: 'Advanced',
+  },
 ];
 
-// Enhanced animation variants
+// Subtle and lightweight card animation
 const cardVariants = {
-  hidden: {
-    opacity: 0,
-    y: 100,
-    scale: 0.95,
-    rotate: 10,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    rotate: 0,
-  },
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0 },
 };
 
 export default function Classes() {
@@ -58,9 +48,9 @@ export default function Classes() {
             initial="hidden"
             animate={inView ? 'visible' : 'hidden'}
             transition={{
-              duration: 0.8,  // Longer duration for smoother animation
-              delay: index * 0.2,
-              ease: [0.25, 0.8, 0.25, 1],  // Custom ease for a more dynamic feel
+              duration: 0.5,
+              delay: index * 0.1,
+              ease: 'easeOut',
             }}
           >
             <div className={styles.imageWrapper}>
