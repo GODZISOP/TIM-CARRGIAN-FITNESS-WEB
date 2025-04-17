@@ -1,8 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Clock, Users, ChevronRight } from 'lucide-react';
-import AOS from 'aos'; // Import AOS
-import 'aos/dist/aos.css'; // Import AOS CSS
 import styles from '../styles/Classes.module.css';
+
+// Register the ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
 
 const classes = [
   {
@@ -26,16 +29,46 @@ const classes = [
 ];
 
 export default function Classes() {
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
   useEffect(() => {
-    // Initialize AOS for scroll animations
-    AOS.init({ duration: 1000, once: false });
+    // Log for debugging
+    console.log('Initializing GSAP and ScrollTrigger');
 
-    // Refresh AOS on mount
-    AOS.refresh();
+    cardRefs.current.forEach((el, index) => {
+      if (!el) return;
 
-    // Optional: Cleanup AOS on unmount
+      // Log the element being animated
+      console.log('Animating card:', el);
+
+      gsap.fromTo(
+        el,
+        {
+          opacity: 0,
+          y: 100,
+          scale: 0.8,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          ease: 'power4.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 80%',  // Trigger the animation when the top of the card hits 80% of the viewport
+            end: 'top 30%',
+            toggleActions: 'play reverse play reverse', // Play when scrolling down, reverse when scrolling back up
+            scrub: false,
+            once: false, // Allow it to be triggered multiple times (on scroll up and down)
+          },
+        }
+      );
+    });
+
+    // Cleanup ScrollTrigger on unmount
     return () => {
-      AOS.refresh();
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
 
@@ -45,11 +78,8 @@ export default function Classes() {
         {classes.map((classItem, index) => (
           <div
             key={index}
+            ref={(el) => (cardRefs.current[index] = el)}
             className={styles.card}
-            data-aos="flip-down" // You can change this to other animations like 'fade-up', 'zoom-in', etc.
-            data-aos-delay={index * 100} // Stagger each card by 100ms
-            data-aos-duration="1000" // Duration for AOS animation
-            data-aos-offset="200"  // Ensure AOS triggers earlier or later
           >
             <div className={styles.imageWrapper}>
               <img
