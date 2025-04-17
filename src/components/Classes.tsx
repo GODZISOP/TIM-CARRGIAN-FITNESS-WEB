@@ -40,7 +40,7 @@ export default function Classes() {
             key={index}
             className={styles.card}
             data-aos="zoom-in-down" // AOS fade-up animation
-            data-aos-duration="800" // Duration of animation
+            data-aos-duration="700" // Duration of animation
             data-aos-delay={index * 200} // Delay for each card
             data-aos-easing="ease-out" // Easing for smooth animation
           >
