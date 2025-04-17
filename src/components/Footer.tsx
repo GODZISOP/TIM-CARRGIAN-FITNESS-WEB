@@ -15,10 +15,23 @@ export default function Footer() {
             Transform your life through fitness. Join our community and achieve your health goals.
           </p>
           <div className={styles.social}>
-            <a href="#" className={styles.socialLink}><Instagram /></a>
-            <a href="#" className={styles.socialLink}><Facebook /></a>
-            <a href="#" className={styles.socialLink}><Twitter /></a>
-          </div>
+  <a 
+    href="https://www.instagram.com/timcfitness?igsh=MWFuOTRnaWs5NHZ0Zw==" 
+    className={styles.socialLink} 
+    target="_blank" 
+    rel="noopener noreferrer"
+  >
+    <Instagram />
+  </a>
+  <a 
+    href="https://www.facebook.com/share/1UhmKpcvxb/?mibextid=wwXIfr" 
+    className={styles.socialLink} 
+    target="_blank" 
+    rel="noopener noreferrer"
+  >
+    <Facebook />
+  </a>
+</div>
         </div>
 
         <div className={styles.section}>
