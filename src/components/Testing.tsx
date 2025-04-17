@@ -1,54 +1,52 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import styles from '../styles/Classes.module.css';
+import styles from '../styles/Test.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const classes = [
+const reviews = [
   {
-    image: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=80',
-    title: 'High-Intensity Training',
-    time: '45 mins',
-    level: 'Intermediate',
+    name: 'John Doe',
+    text: 'This workout routine is amazing! I’ve been following it for a few weeks and already feel stronger. Highly recommend!',
+    rating: 5,
   },
   {
-    image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80',
-    title: 'Yoga Flow',
-    time: '60 mins',
-    level: 'All Levels',
+    name: 'Jane Smith',
+    text: 'I loved the Yoga Flow class! It was so relaxing and a great way to unwind. Can’t wait for the next session.',
+    rating: 4,
   },
   {
-    image: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&q=80',
-    title: 'Strength Training',
-    time: '50 mins',
-    level: 'Advanced',
+    name: 'Tom Brown',
+    text: 'The High-Intensity Training was challenging but super effective. I’m seeing great results!',
+    rating: 4,
   },
 ];
 
-export default function Classes() {
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+const getStars = (rating: number) => {
+  const fullStars = Array(rating).fill('★');
+  const emptyStars = Array(5 - rating).fill('☆');
+  return [...fullStars, ...emptyStars].join(' ');
+};
+
+export default function Reviews() {
   useEffect(() => {
-    cardRefs.current.forEach((el, index) => {
-      if (!el) return;
-  
+    // Animation logic for reviews using gsap
+    const reviewCards = document.querySelectorAll(`.${styles.reviewCard}`);
+    reviewCards.forEach((card, index) => {
       gsap.fromTo(
-        el,
+        card,
         {
           opacity: 0,
-          y: 100,
-          x: -100,
-          scale: 0.9,
+          y: 50,
         },
         {
           opacity: 1,
           y: 0,
-          x: 0,
-          scale: 1,
           duration: 0.8,
           ease: 'power4.out',
           scrollTrigger: {
-            trigger: el,
+            trigger: card,
             start: 'top 85%',
             end: 'top 30%',
             toggleActions: 'play reverse play reverse',
@@ -57,37 +55,24 @@ export default function Classes() {
           },
         }
       );
-      
-      
-      
     });
-  
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, [])
-    return (
-    <section className={styles.section}>
-      <div className={styles.grid}>
-        {classes.map((classItem, index) => (
-          <div
-            key={index}
-            ref={(el) => (cardRefs.current[index] = el)}
-            className={styles.card}
-          >
-            <div className={styles.imageWrapper}>
-              <img src={classItem.image} alt={classItem.title} className={styles.image} />
-              <div className={styles.overlay}>
-                <button className={styles.button}>
-                  Join Class
-                </button>
+  }, []);
+
+  return (
+    <section className={styles.reviewSection}>
+      <h2 className={styles.reviewTitle}>Customer Reviews</h2>
+      <div className={styles.reviewGrid}>
+        {reviews.map((review, index) => (
+          <div key={index} className={styles.reviewCard} data-aos="fade-up" data-aos-delay={index * 100}>
+            <div className={styles.reviewContent}>
+              <div className={styles.reviewText}>
+                <p>{review.text}</p>
+                <div className={styles.reviewRating}>
+                  <span>{getStars(review.rating)}</span>
+                </div>
               </div>
-            </div>
-            <div className={styles.content}>
-              <h3 className={styles.title}>{classItem.title}</h3>
-              <div className={styles.info}>
-                <span>{classItem.time}</span>
-                <span>{classItem.level}</span>
+              <div className={styles.reviewFooter}>
+                <span>- {review.name}</span>
               </div>
             </div>
           </div>

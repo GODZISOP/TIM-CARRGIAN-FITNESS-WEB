@@ -1,85 +1,45 @@
-.container {
-  background-color: white;
-  padding: 6rem 1rem;
+/* In your Classes.module.css file */
+.reviewSection {
+  padding: 40px;
+  background-color: #f9f9f9;
 }
 
-.header {
+.reviewTitle {
   text-align: center;
-  margin-bottom: 4rem;
+  font-size: 2rem;
+  margin-bottom: 20px;
 }
 
-.headerTitle {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #1f2937; /* gray-900 */
-  margin-bottom: 1rem;
-}
-
-.headerSubtitle {
-  color: #4b5563; /* gray-600 */
-  max-width: 42rem;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-
-.grid {
+.reviewGrid {
   display: grid;
-  gap: 2.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  max-width: 1200px;
-  margin: 0 auto;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
 }
 
-.testimonialCard {
-  background-color: #f9fafb; /* gray-50 */
-  border-radius: 1rem;
-  padding: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: transform 0.3s ease;
+.reviewCard {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
 }
 
-.testimonialCard:hover {
-  transform: translateY(-4px);
+.reviewCard:hover {
+  transform: translateY(-10px);
 }
 
-.testimonialHeader {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1.5rem;
+.reviewText {
+  font-size: 1rem;
+  margin-bottom: 15px;
 }
 
-.testimonialImage {
-  height: 3.5rem;
-  width: 3.5rem;
-  border-radius: 9999px;
-  object-fit: cover;
-  margin-right: 1rem;
-  border: 2px solid #e5e7eb; /* subtle border */
+.reviewRating {
+  font-size: 1.2rem;
+  color: #f39c12;
 }
 
-.testimonialName {
-  font-weight: 600;
-  color: #1f2937; /* gray-900 */
-  margin: 0;
-}
-
-.testimonialRole {
-  color: #6b7280; /* gray-600 */
-  font-size: 0.875rem;
-  margin: 0;
-}
-
-.starRating {
-  display: flex;
-  margin-bottom: 1rem;
-  color: #facc15; /* yellow-400 */
-}
-
-.quote {
-  font-style: italic;
-  color: #4b5563; /* gray-600 */
-  line-height: 1.6;
+.reviewFooter {
+  text-align: right;
+  font-weight: bold;
+  color: #333;
 }

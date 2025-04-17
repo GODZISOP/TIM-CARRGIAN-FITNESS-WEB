@@ -18,8 +18,9 @@ function App() {
         <Hero data-aos="fade-up" data-aos-duration="1500" />
         <Features data-aos="fade-right" data-aos-duration="2000" />
         <Trainerbio data-aos="fade-left" data-aos-duration="1500" />
-        <Test data-aos="flip-up" data-aos-duration="1200" />
+        <Classes></Classes>
         <BMICalculator data-aos="flip-left" data-aos-duration="1300" />
+        <Test data-aos="flip-up" data-aos-duration="1200" />
         <Footer data-aos="fade-in" data-aos-duration="1600" />
       </AOSWrapper>
     </div>

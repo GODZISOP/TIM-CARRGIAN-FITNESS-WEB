@@ -1,12 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { Clock, Users, ChevronRight } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import AOS from 'aos'; // Import AOS
 import 'aos/dist/aos.css'; // Import AOS CSS
 import styles from '../styles/Classes.module.css';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const classes = [
   {
@@ -30,46 +26,16 @@ const classes = [
 ];
 
 export default function Classes() {
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-
   useEffect(() => {
-    AOS.init({ duration: 1000, once: true }); // Initialize AOS animations
+    // Initialize AOS for scroll animations
+    AOS.init({ duration: 1000, once: false });
 
-    // Backscroll effect with GSAP
-    const isMobile = window.innerWidth <= 768;
+    // Refresh AOS on mount
+    AOS.refresh();
 
-    cardRefs.current.forEach((el, index) => {
-      if (!el) return;
-
-      // Basic scroll-triggered animation using GSAP
-      gsap.fromTo(
-        el,
-        {
-          opacity: 0,
-          y: isMobile ? 50 : index % 2 === 0 ? 100 : -100,
-          x: isMobile ? 0 : index % 2 === 0 ? -100 : 50,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          x: 0,
-          duration: 0.75, // Smooth transition
-          ease: 'power2.out', // Adjusted easing
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 85%', // Starts animation earlier
-            end: 'bottom 50%', // Ends when it leaves the viewport
-            toggleActions: 'play none none none', // Play on scroll down only
-            scrub: 0.5, // Smooth scrolling effect
-            markers: false, // Set to true for debugging
-          },
-        }
-      );
-    });
-
+    // Optional: Cleanup AOS on unmount
     return () => {
-      // Clean up ScrollTriggers
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      AOS.refresh();
     };
   }, []);
 
@@ -79,13 +45,19 @@ export default function Classes() {
         {classes.map((classItem, index) => (
           <div
             key={index}
-            ref={(el) => (cardRefs.current[index] = el)}
             className={styles.card}
-            data-aos="fade-up" // AOS fade-up animation
-            data-aos-delay={index * 100} // Add delay to each card for staggered effect
+            data-aos="flip-down" // You can change this to other animations like 'fade-up', 'zoom-in', etc.
+            data-aos-delay={index * 100} // Stagger each card by 100ms
+            data-aos-duration="1000" // Duration for AOS animation
+            data-aos-offset="200"  // Ensure AOS triggers earlier or later
           >
             <div className={styles.imageWrapper}>
-              <img src={classItem.image} alt={classItem.title} className={styles.image} />
+              <img
+                src={classItem.image}
+                alt={classItem.title}
+                className={styles.image}
+                loading="lazy" // Lazy load images for performance
+              />
               <div className={styles.overlay}>
                 <button className={styles.button}>
                   Join Class
