@@ -38,10 +38,10 @@ export default function Footer() {
 
         <div className={styles.section}>
           <h3 className={styles.title}>Contact</h3>
-          <p className={styles.text}>123 Fitness Street</p>
-          <p className={styles.text}>New York, NY 10001</p>
-          <p className={styles.text}>contact@fitlife.com</p>
-          <p className={styles.text}>(555) 123-4567</p>
+          <p className={styles.text}>137 Erin Lane</p>
+          <p className={styles.text}>Brodheadsville, PA 18322</p>
+          <p className={styles.text}>timc491@gmail.com</p>
+          <p className={styles.text}>(+1)6107519921</p>
         </div>
       </div>
       
