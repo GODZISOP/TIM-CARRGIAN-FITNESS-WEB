@@ -43,12 +43,12 @@ export default function Reviews() {
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
+          duration: 0.1,
           ease: 'power4.out',
           scrollTrigger: {
             trigger: card,
             start: 'top 85%',
-            end: 'top 30%',
+            end: 'top 1%',
             toggleActions: 'play reverse play reverse',
             scrub: false,
             once: false,
@@ -63,7 +63,7 @@ export default function Reviews() {
       <h2 className={styles.reviewTitle}>Customer Reviews</h2>
       <div className={styles.reviewGrid}>
         {reviews.map((review, index) => (
-          <div key={index} className={styles.reviewCard} data-aos="fade-up" data-aos-delay={index * 100}>
+          <div key={index} className={styles.reviewCard} data-aos="fade-up" data-aos-delay={index * 30}>
             <div className={styles.reviewContent}>
               <div className={styles.reviewText}>
                 <p>{review.text}</p>
