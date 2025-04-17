@@ -1,22 +1,28 @@
+.hello {
+  background-color: #f3f4f6; /* Tailwind’s gray-100 */
+  margin: 0 0;
+}
+
 .grid {
   display: flex;
   width: 100vw;
-  margin-top: 5vh;
-  justify-content: flex-start;         /* left-align for natural scroll */
+  margin-top: 1vh;
+  justify-content: flex-start;  /* left-align for natural scroll */
   gap: 3vw;
   justify-content: center;
-  overflow-x: hidden;                    /* enables horizontal scrolling */
-  overflow-y: hidden;                 /* prevents vertical scroll */
+  overflow-x: hidden;           /* enables horizontal scrolling */
+  overflow-y: hidden;          /* prevents vertical scroll */
   scroll-snap-type: x mandatory;
-  scrollbar-width: auto;               /* for Firefox */
+  scrollbar-width: auto;       /* for Firefox */
 }
+
 .section {
   padding: 10vh 5vw;
   margin: 0 auto;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: hidden;
-  background-color: #f3f4f6; /* Tailwind’s gray-100 */
+  background-color: #f3f4f6; /* Tailwind’s gray-100 for consistent background */
 }
 
 /* Card Styles */
@@ -133,6 +139,7 @@
     padding: 4vw;
   }
 }
+
 /* Mobile Responsive */
 @media (max-width: 500px) {
   .grid {
@@ -158,5 +165,3 @@
     padding: 4vw;
   }
 }
-
-
