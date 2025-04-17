@@ -8,6 +8,7 @@ import Classes from './components/Classes';
 import Footer from './components/Footer';
 import BMICalculator from './components/calculator';
 import Test from './components/Testing';
+import TailoredFitnessPrograms from './components/cardio';
 import Trainerbio from './components/Trainer';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Classes></Classes>
         <BMICalculator data-aos="flip-left" data-aos-duration="1300" />
         <Test data-aos="flip-up" data-aos-duration="1200" />
+        <TailoredFitnessPrograms></TailoredFitnessPrograms>
         <Footer data-aos="fade-in" data-aos-duration="1600" />
       </AOSWrapper>
     </div>
