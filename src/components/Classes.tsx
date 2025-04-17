@@ -57,7 +57,7 @@ export default function Classes() {
           scrollTrigger: {
             trigger: el,
             start: 'top 80%',  // Trigger the animation when the top of the card hits 80% of the viewport
-            end: 'top 30%',
+            end: 'top 1%',
             toggleActions: 'play reverse play reverse', // Play when scrolling down, reverse when scrolling back up
             scrub: false,
             once: false, // Allow it to be triggered multiple times (on scroll up and down)
