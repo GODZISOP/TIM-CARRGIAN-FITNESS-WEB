@@ -33,23 +33,23 @@ const Trainerbio = () => {
           data-aos-duration="1000" // Duration of the animation
         >
           <div className={styles.header}>
-            <h2 className={styles.name}>Coach Alex Strong</h2>
+            <h2 className={styles.name}>Coach Tim Carrigan</h2>
             <div className={styles.titleDivider}></div>
-            <h4 className={styles.title}>Certified Strength & Conditioning Specialist (CSCS)</h4>
+            <h4 className={styles.title}> CERTIFIED PERSONAL TRAINER, CERTIFIED RUNNING COACH, CERTIFIED STRENGTH AND CONDITIONING COACH.</h4>
           </div>
 
           <div className={styles.achievements}>
             <div className={styles.achievementItem} data-aos="fade-up" data-aos-duration="1000">
-              <span>🏆</span> 10+ Years Experience
+              <span>🏆</span> 3+ Years Experience
             </div>
             <div className={styles.achievementItem} data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-              <span>💪</span> NASM Certified
+              <span>💪</span> Certified Personal Trainer
             </div>
             <div className={styles.achievementItem} data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
-              <span>🥇</span> Olympic Lifting Coach
+              <span>🥇</span> Performance Optimization Expert
             </div>
             <div className={styles.achievementItem} data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
-              <span>🧠</span> Nutrition Specialist
+              <span>🧠</span> Goal-Focused Coaching Approach
             </div>
           </div>
 
@@ -58,8 +58,7 @@ const Trainerbio = () => {
               <span className={styles.titleAccent}>My Training</span> Philosophy
             </h3>
             <p className={styles.philosophyText} data-aos="fade-up" data-aos-duration="1000">
-              I believe fitness is more than just physical — it's about mindset, discipline, and building the best version of yourself. 
-              My mission is to empower you with the tools, guidance, and motivation to crush your goals inside and outside the gym.
+            I believe training should be purposeful, progressive, and personalized. As a certified personal trainer, running coach, and strength & conditioning specialist, my approach is rooted in science, built on discipline, and focused on long-term results. Whether you're chasing a faster mile, building muscle, or just moving better — I'm here to guide you every step of the way.
             </p>
           </div>
 
