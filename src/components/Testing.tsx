@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import AOS from 'aos'; // Import AOS
+import 'aos/dist/aos.css'; // Import AOS CSS
 import styles from '../styles/Test.module.css';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const reviews = [
   {
@@ -31,31 +29,16 @@ const getStars = (rating: number) => {
 
 export default function Reviews() {
   useEffect(() => {
-    // Animation logic for reviews using gsap
-    const reviewCards = document.querySelectorAll(`.${styles.reviewCard}`);
-    reviewCards.forEach((card, index) => {
-      gsap.fromTo(
-        card,
-        {
-          opacity: 0,
-          y: 50,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.1,
-          ease: 'power4.out',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 85%',
-            end: 'top 1%',
-            toggleActions: 'play reverse play reverse',
-            scrub: false,
-            once: false,
-          },
-        }
-      );
-    });
+    // Initialize AOS
+    AOS.init({ duration: 1000, once: true });
+
+    // Optional: Refresh AOS on mount if needed
+    AOS.refresh();
+    
+    // Cleanup AOS when the component unmounts (optional)
+    return () => {
+      AOS.refresh();
+    };
   }, []);
 
   return (
@@ -63,7 +46,13 @@ export default function Reviews() {
       <h2 className={styles.reviewTitle}>Customer Reviews</h2>
       <div className={styles.reviewGrid}>
         {reviews.map((review, index) => (
-          <div key={index} className={styles.reviewCard} data-aos="fade-up" data-aos-delay={index * 30}>
+          <div
+            key={index}
+            className={styles.reviewCard}
+            data-aos="flip-down" // Apply the AOS animation effect here
+            data-aos-delay={index * 100} // Optional: Add a delay to stagger animations
+            data-aos-duration="1000" // Duration of the animation
+          >
             <div className={styles.reviewContent}>
               <div className={styles.reviewText}>
                 <p>{review.text}</p>
