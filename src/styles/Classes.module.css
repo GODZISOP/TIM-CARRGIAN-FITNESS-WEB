@@ -123,14 +123,18 @@
 /* Mobile Responsive */
 @media (max-width: 500px) {
   .grid {
-    flex-direction: column;
-    align-items: center;
-    overflow-x: hidden;
+    flex-direction: row;            /* ✅ Keep cards in a row */
+    align-items: flex-start;
+    overflow-x: auto;               /* ✅ Enable horizontal scrolling */
+    -webkit-overflow-scrolling: touch;  /* ✅ Smooth momentum scroll on iOS */
+    scroll-snap-type: x mandatory;
+    padding-bottom: 2vh;
   }
 
   .card {
     min-width: 85vw;
     max-width: 90vw;
+    scroll-snap-align: start;
   }
 
   .imageWrapper {
@@ -141,3 +145,5 @@
     padding: 4vw;
   }
 }
+
+
