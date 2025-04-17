@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { Clock, Users, ChevronRight } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import AOS from 'aos'; // Import AOS
+import 'aos/dist/aos.css'; // Import AOS CSS
 import styles from '../styles/Classes.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -31,11 +33,15 @@ export default function Classes() {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    const isMobile = window.innerWidth <= 768; // Check if the device is mobile
+    AOS.init({ duration: 1000, once: true }); // Initialize AOS animations
+
+    // Backscroll effect with GSAP
+    const isMobile = window.innerWidth <= 768;
 
     cardRefs.current.forEach((el, index) => {
       if (!el) return;
 
+      // Basic scroll-triggered animation using GSAP
       gsap.fromTo(
         el,
         {
@@ -47,22 +53,23 @@ export default function Classes() {
           opacity: 1,
           y: 0,
           x: 0,
-          duration: 0.75,  // Reduced duration for smoother effect
-          ease: 'power2.out',  // Adjusted easing for smoother transitions
+          duration: 0.75, // Smooth transition
+          ease: 'power2.out', // Adjusted easing
           scrollTrigger: {
             trigger: el,
-            start: 'top 85%', // Start the animation earlier when the element comes into view
-            end: 'bottom 50%', // Ends animation when it leaves the viewport
-            toggleActions: 'play none none none', // Play only when scrolling down
-            scrub: 0.5, // Adjust scrub value for better smoothness
-            markers: false, // Set to true for debugging the scrollTrigger positions
+            start: 'top 85%', // Starts animation earlier
+            end: 'bottom 50%', // Ends when it leaves the viewport
+            toggleActions: 'play none none none', // Play on scroll down only
+            scrub: 0.5, // Smooth scrolling effect
+            markers: false, // Set to true for debugging
           },
         }
       );
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      // Clean up ScrollTriggers
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 
@@ -74,6 +81,8 @@ export default function Classes() {
             key={index}
             ref={(el) => (cardRefs.current[index] = el)}
             className={styles.card}
+            data-aos="fade-up" // AOS fade-up animation
+            data-aos-delay={index * 100} // Add delay to each card for staggered effect
           >
             <div className={styles.imageWrapper}>
               <img src={classItem.image} alt={classItem.title} className={styles.image} />
