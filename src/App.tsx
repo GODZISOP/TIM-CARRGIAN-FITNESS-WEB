@@ -9,7 +9,8 @@ import Features from './components/Features';
 import Classes from './components/Classes';
 import Footer from './components/Footer';
 import BMICalculator from './components/calculator';
-import Contact from './components/contact';
+import Contact from './components/Contact1'; // ✅ Correct
+
 import Hero from './components/Hero';
 import Trainerbio from './components/Trainer';
 import TailoredFitnessPrograms from './components/cardio';
@@ -44,7 +45,7 @@ function App() {
         />
 
         {/* Other Pages */}
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/Contact" element={<Contact />} />
         <Route path="/classes" element={<Classes />} />
         <Route path="/bmi-calculator" element={<BMICalculator />} />
       </Routes>
