@@ -50,7 +50,7 @@ const Trainerbio = () => {
               <span>🥇</span> Performance Optimization Expert
             </div>
             <div className={styles.achievementItem} data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
-              <span>🧠</span> Goal-Focused Coaching Approach
+              <span>🧠</span> Goal-Focused Coaching Approach.
             </div>
           </div>
 
