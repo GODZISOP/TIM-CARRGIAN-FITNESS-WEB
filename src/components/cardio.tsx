@@ -19,7 +19,7 @@ const imageMap: Record<string, string> = {
 // Updated tabContent with descriptions for each training type
 const tabContent: Record<string, string[]> = {
   personalTrainer: [
-    "Personalized fitness assessments and goal setting",
+    "Personalized fitness assessments and goal setting.",
     "Customized workout plans tailored to individual needs",
     "Expert guidance on proper form, injury prevention, and progression",
     "Motivational support to help you stay on track with your fitness goals",
