@@ -45,7 +45,7 @@ function App() {
         />
 
         {/* Other Pages */}
-        <Route path="/Contact" element={<Contact />} />
+        <Route path="/Contact1" element={<Contact />} />
         <Route path="/classes" element={<Classes />} />
         <Route path="/bmi-calculator" element={<BMICalculator />} />
       </Routes>
