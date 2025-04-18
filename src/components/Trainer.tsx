@@ -3,6 +3,7 @@ import AOS from 'aos'; // Import AOS
 import 'aos/dist/aos.css'; // Import AOS CSS
 import trainerImg from '../images/OIP.jpeg';
 import styles from '../styles/Train.module.css';
+import trainerImg1 from "../images/WhatsApp Image 2025-04-18 at 21.11.10_912c5b32.jpg"; // ✅ Imported image
 
 const Trainerbio = () => {
   useEffect(() => {
@@ -21,7 +22,7 @@ const Trainerbio = () => {
           data-aos-duration="1000" // Duration of the animation
           data-aos-easing="ease-out" // Ease-out for a smoother animation
         >
-          <img src={trainerImg} alt="Trainer Alex Strong" className={styles.trainerImage} />
+          <img src={trainerImg1} alt="Trainer Alex Strong" className={styles.trainerImage} />
           <div className={styles.imageOverlay}></div>
         </div>
 
@@ -35,8 +36,8 @@ const Trainerbio = () => {
           <div className={styles.header}>
             <h2 className={styles.name}>Coach Tim Carrigan</h2>
             <div className={styles.titleDivider}></div>
-            <h4 className={styles.title}> CERTIFIED PERSONAL TRAINER, CERTIFIED RUNNING COACH, CERTIFIED STRENGTH AND CONDITIONING COACH.</h4>
-          </div>
+            <h4 className={styles.title}> .</h4>
+          </div>CERTIFIED PERSONAL TRAINER, CERTIFIED RUNNING COACH, CERTIFIED STRENGTH AND CONDITIONING COACH
 
           <div className={styles.achievements}>
             <div className={styles.achievementItem} data-aos="fade-up" data-aos-duration="1000">

@@ -21,7 +21,7 @@ const reviews = [
   },
 ];
 
-const getStars = (rating: number) => {
+const GetStars = (rating: number) => {
   const fullStars = Array(rating).fill('★');
   const emptyStars = Array(5 - rating).fill('☆');
   return [...fullStars, ...emptyStars].join(' ');
@@ -57,7 +57,7 @@ export default function Reviews() {
               <div className={styles.reviewText}>
                 <p>{review.text}</p>
                 <div className={styles.reviewRating}>
-                  <span>{getStars(review.rating)}</span>
+                  <span>{GetStars(review.rating)}</span>
                 </div>
               </div>
               <div className={styles.reviewFooter}>

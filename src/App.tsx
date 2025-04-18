@@ -1,30 +1,55 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+// Components
 import Navbar from './components/Navbar';
-import FeatureMarquee from './components/Maq';
-import Hero from './components/Hero';
-import AOSWrapper from './components/AOSWrapper';
 import Features from './components/Features';
 import Classes from './components/Classes';
 import Footer from './components/Footer';
 import BMICalculator from './components/calculator';
-import Test from './components/Testing';
-import TailoredFitnessPrograms from './components/cardio';
+import Contact from './components/contact';
+import Hero from './components/Hero';
 import Trainerbio from './components/Trainer';
+import TailoredFitnessPrograms from './components/cardio';
+import Reviews from './components/Testing';
 
 function App() {
+  const location = useLocation();
+
+  useEffect(() => {
+    AOS.init({ duration: 1000, easing: 'ease-out', once: false });
+  }, [location]);
+
   return (
     <div className="min-h-screen">
-      <AOSWrapper>
-        <Navbar data-aos="fade-down" data-aos-duration="1000" />
-        <Hero data-aos="fade-up" data-aos-duration="1500" />
-        <Features data-aos="fade-right" data-aos-duration="2000" />
-        <Trainerbio data-aos="fade-left" data-aos-duration="1500" />
-        <Classes></Classes>
-        <TailoredFitnessPrograms></TailoredFitnessPrograms>
-        <BMICalculator data-aos="flip-left" data-aos-duration="1300" />
-        <Test data-aos="flip-up" data-aos-duration="1200" />
-        <Footer data-aos="fade-in" data-aos-duration="1600" />
-      </AOSWrapper>
+      <Navbar />
+
+      <Routes>
+        {/* Home Page Route */}
+        <Route
+          path="/"
+          element={
+            <>
+              <Hero />
+              <Features />
+              <Trainerbio />
+              <Classes />
+              <TailoredFitnessPrograms />
+              <BMICalculator />
+              <Reviews />
+            </>
+          }
+        />
+
+        {/* Other Pages */}
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/classes" element={<Classes />} />
+        <Route path="/bmi-calculator" element={<BMICalculator />} />
+      </Routes>
+
+      <Footer />
     </div>
   );
 }
